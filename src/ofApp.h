@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxBlockGenerator.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -20,5 +22,16 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+
+		void updateUI();
+
+		std::unique_ptr<blockData> block_data;
+		std::unique_ptr<drawObject> draw_object;
+
+		ofRectangle gui_rect;
+		ofRectangle draw_rect;
+		float gui_width = 500.0f;
+		float margin = 10.0f;
+
+		ofxPanel gui;
 };
