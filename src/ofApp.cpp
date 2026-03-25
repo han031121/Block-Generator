@@ -7,26 +7,9 @@ void ofApp::setup(){
 	updateLayout();
 
 	ofxBaseGui::loadFont("Roboto-Regular.ttf", 20);
-	//set_block.addListener(this,);
-	//generate_block.addListener(this,);
-	max_r.addListener(this, &ofApp::maxSizeChanged);
-	max_c.addListener(this, &ofApp::maxSizeChanged);
-	max_h.addListener(this, &ofApp::maxSizeChanged);
-	block_count_1.addListener(this, &ofApp::minBlockCountChanged);
-	block_count_2.addListener(this, &ofApp::maxBlockCountChanged);
 
-	gui_block.setup("Block", ofxPanelDefaultFilename, margin, margin);
-	gui_block.setWidthElements(gui_width);
-	gui_block.setDefaultHeight(40);
-	gui_block.add(block_count_1.set("Min block count", 4, 1, 1000));
-	gui_block.add(block_count_2.set("Max block count", 8, 1, 1000));
-	gui_block.add(max_r.set("Max row", 3, 1, 10));
-	gui_block.add(max_c.set("Max colunm", 3, 1, 10));
-	gui_block.add(max_h.set("Max height", 3, 1, 10));
-	gui_block.add(density.set("Density", 20, 0, 100));
-	gui_block.add(allow_duplication.set("Allow duplication", false));
-	gui_block.add(set_block.setup("Set block"));
-	gui_block.add(generate_block.setup("Generate block"));
+	guiBlockSetup();
+	guiDrawSetup();
 
 	block_data = std::make_unique<blockData>(block_count_1, block_count_2, max_r, max_c, max_h);
 	block_data->generateBlock();
@@ -50,6 +33,35 @@ void ofApp::initalizeUiValue() {
 	light_degree.set({ 25, 38 });
 	thickness.set(2);
 	draw_color.set(ofColor(220, 185, 154));
+}
+
+//--------------------------------------------------------------
+void ofApp::guiBlockSetup() {
+	//set_block.addListener(this,);
+	//generate_block.addListener(this,);
+	max_r.addListener(this, &ofApp::maxSizeChanged);
+	max_c.addListener(this, &ofApp::maxSizeChanged);
+	max_h.addListener(this, &ofApp::maxSizeChanged);
+	block_count_1.addListener(this, &ofApp::minBlockCountChanged);
+	block_count_2.addListener(this, &ofApp::maxBlockCountChanged);
+
+	gui_block.setup("Block", ofxPanelDefaultFilename, margin, margin);
+	gui_block.setWidthElements(gui_width);
+	gui_block.setDefaultHeight(40);
+	gui_block.add(block_count_1.set("Min block count", 4, 1, 1000));
+	gui_block.add(block_count_2.set("Max block count", 8, 1, 1000));
+	gui_block.add(max_r.set("Max row", 3, 1, 10));
+	gui_block.add(max_c.set("Max colunm", 3, 1, 10));
+	gui_block.add(max_h.set("Max height", 3, 1, 10));
+	gui_block.add(density.set("Density", 20, 0, 100));
+	gui_block.add(allow_duplication.set("Allow duplication", false));
+	gui_block.add(set_block.setup("Set block"));
+	gui_block.add(generate_block.setup("Generate block"));
+}
+
+//--------------------------------------------------------------
+void ofApp::guiDrawSetup() {
+
 }
 
 //--------------------------------------------------------------

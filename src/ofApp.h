@@ -25,6 +25,8 @@ class ofApp : public ofBaseApp{
 
 		void updateLayout();
 		void initalizeUiValue();
+		void guiBlockSetup();
+		void guiDrawSetup();
 
 		void maxSizeChanged(int & v);
 		void maxBlockCountChanged(int & v);
