@@ -24,13 +24,16 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		void updateLayout();
-		void initalizeUiValue();
+		void initializeUiValue();
 		void guiBlockSetup();
 		void guiDrawSetup();
+
+		void drawObjectUpdate();
 
 		void maxSizeChanged(int & v);
 		void maxBlockCountChanged(int & v);
 		void minBlockCountChanged(int & v);
+		void drawResetClicked();
 
 		std::unique_ptr<blockData> block_data;
 		std::unique_ptr<drawObject> draw_object;
@@ -45,15 +48,18 @@ class ofApp : public ofBaseApp{
 		ofParameter<float> density;
 		ofParameter<bool> allow_duplication = false;
 		ofParameter<void> set_block, generate_block;
-		ofParameter<glm::vec2> cam_degree;
-		ofParameter<glm::vec2> light_degree;
-		ofParameter<float> cam_dist, thickness;
+		ofParameter<float> cam_degree_xz, cam_degree_y;
+		ofParameter<float> light_degree_xz, light_degree_y;
+		ofParameter<float> magnification;
+		ofParameter<int> thickness;
 		ofParameter<ofColor> draw_color;
-		ofParameter<void> save_image, reset, calculate_cam_dist;
+		ofParameter<void> save_image, reset;
 
 		ofParameterGroup block_settings;
 		ofParameterGroup block_generation;
 		ofParameterGroup draw_settings;
+		ofParameterGroup cam_degree;
+		ofParameterGroup light_degree;
 		ofParameterGroup draw_functions;
 
 		ofxPanel gui_block;

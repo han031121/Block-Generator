@@ -29,9 +29,11 @@ void ofApp::updateLayout() {
 }
 
 //--------------------------------------------------------------
-void ofApp::initalizeUiValue() {
-	cam_degree.set({ 25, 20 });
-	light_degree.set({ 25, 38 });
+void ofApp::initializeUiValue() {
+	cam_degree_xz.set(25);
+	cam_degree_y.set(20);
+	light_degree_xz.set(25);
+	light_degree_y.set(20);
 	thickness.set(2);
 	draw_color.set(ofColor(220, 185, 154));
 }
@@ -68,16 +70,24 @@ void ofApp::guiBlockSetup() {
 
 //--------------------------------------------------------------
 void ofApp::guiDrawSetup() {
+	reset.addListener(this, &ofApp::initializeUiValue);
+
 	draw_settings.setName("Draw Settings");
 	draw_functions.setName("Draw Functions");
+	cam_degree.setName("Cam degree");
+	light_degree.setName("Light degree");
 
-	draw_settings.add(cam_degree.set("Cam degree", { 25, 20 }, { 0, 0 }, { 359, 359 }));
-	draw_settings.add(light_degree.set("Light degree", { 25, 38 }, { 0, 0 }, { 359, 359 }));
+	cam_degree.add(cam_degree_xz.set("Horizontal", 25, 0, 359.99));
+	cam_degree.add(cam_degree_y.set("Vertical", 20, -89.99, 89.99));
+	light_degree.add(light_degree_xz.set("Horizontal", 25, 0, 359.99));
+	light_degree.add(light_degree_y.set("Vertical", 38, -89.99, 89.99));
+
+	draw_settings.add(cam_degree);
+	draw_settings.add(light_degree);
 	draw_settings.add(thickness.set("Line thickness", 2, 0, 10));
-	draw_settings.add(cam_dist.set("Cam distance", 2000, 1000, 4000));
+	draw_settings.add(magnification.set("Magnification", 1, 0.1, 5));
 	draw_functions.add(save_image.set("Save image"));
 	draw_functions.add(reset.set("Reset settings"));
-	draw_functions.add(calculate_cam_dist.set("Set cam dist"));
 
 	gui_draw.setup("DRAW MENU", "draw_settings.xml", rect_draw_gui.x, rect_draw_gui.y);
 	gui_draw.setWidthElements(gui_width);
@@ -85,6 +95,15 @@ void ofApp::guiDrawSetup() {
 	gui_draw.add(draw_settings);
 	gui_draw.add(draw_color.set("Draw color", ofColor(220, 185, 154)));
 	gui_draw.add(draw_functions);
+}
+
+//--------------------------------------------------------------
+void ofApp::drawObjectUpdate() {
+	draw_object->camDegreeUpdate(cam_degree_xz.get(), cam_degree_y.get());
+	draw_object->lightDegreeUpdate(light_degree_xz.get(), light_degree_y.get());
+	draw_object->thicknessUpdate(thickness.get());
+	draw_object->camDistUpdate(magnification.get() * draw_object->getDefaultCamDist());
+	draw_object->blockColorUpdate(draw_color.get().r, draw_color.get().g, draw_color.get().b);
 }
 
 //--------------------------------------------------------------
@@ -114,9 +133,16 @@ void ofApp::minBlockCountChanged(int & v) {
 }
 
 //--------------------------------------------------------------
+void ofApp::drawResetClicked() {
+	initializeUiValue();
+}
+
+//--------------------------------------------------------------
 void ofApp::update(){
-	if (draw_object)
+	if (draw_object) {
+		drawObjectUpdate();
 		draw_object->render();
+	}
 }
 
 //--------------------------------------------------------------
