@@ -37,6 +37,9 @@ void ofApp::initalizeUiValue() {
 
 //--------------------------------------------------------------
 void ofApp::guiBlockSetup() {
+	block_settings.setName("Block settings");
+	block_generation.setName("Block Generation");
+
 	//set_block.addListener(this,);
 	//generate_block.addListener(this,);
 	max_r.addListener(this, &ofApp::maxSizeChanged);
@@ -45,18 +48,21 @@ void ofApp::guiBlockSetup() {
 	block_count_1.addListener(this, &ofApp::minBlockCountChanged);
 	block_count_2.addListener(this, &ofApp::maxBlockCountChanged);
 
+	block_settings.add(block_count_1.set("Min block count", 4, 1, 1000));
+	block_settings.add(block_count_2.set("Max block count", 8, 1, 1000));
+	block_settings.add(max_r.set("Max row", 3, 1, 10));
+	block_settings.add(max_c.set("Max colunm", 3, 1, 10));
+	block_settings.add(max_h.set("Max height", 3, 1, 10));
+	block_settings.add(density.set("Density", 20, 0, 100));
+	block_settings.add(allow_duplication.set("Allow duplication", false));
+	block_generation.add(set_block.set("Set block"));
+	block_generation.add(generate_block.set("Generate block"));
+
 	gui_block.setup("Block", ofxPanelDefaultFilename, margin, margin);
 	gui_block.setWidthElements(gui_width);
 	gui_block.setDefaultHeight(40);
-	gui_block.add(block_count_1.set("Min block count", 4, 1, 1000));
-	gui_block.add(block_count_2.set("Max block count", 8, 1, 1000));
-	gui_block.add(max_r.set("Max row", 3, 1, 10));
-	gui_block.add(max_c.set("Max colunm", 3, 1, 10));
-	gui_block.add(max_h.set("Max height", 3, 1, 10));
-	gui_block.add(density.set("Density", 20, 0, 100));
-	gui_block.add(allow_duplication.set("Allow duplication", false));
-	gui_block.add(set_block.setup("Set block"));
-	gui_block.add(generate_block.setup("Generate block"));
+	gui_block.add(block_settings);
+	gui_block.add(block_generation);
 }
 
 //--------------------------------------------------------------
