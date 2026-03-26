@@ -71,6 +71,7 @@ void ofApp::guiBlockSetup() {
 //--------------------------------------------------------------
 void ofApp::guiDrawSetup() {
 	reset.addListener(this, &ofApp::initializeUiValue);
+	save_image.addListener(this, &ofApp::saveImageClicked);
 
 	draw_settings.setName("Draw Settings");
 	draw_functions.setName("Draw Functions");
@@ -156,6 +157,14 @@ void ofApp::generateBlockClicked() {
 //--------------------------------------------------------------
 void ofApp::drawResetClicked() {
 	initializeUiValue();
+}
+
+//--------------------------------------------------------------
+void ofApp::saveImageClicked() {
+	if (!draw_object)
+		return;
+	std::string name = "images/" + draw_object->getIdentify() + ".jpg";
+	draw_object->saveImage(name);
 }
 
 //--------------------------------------------------------------

@@ -36,6 +36,7 @@ class ofApp : public ofBaseApp{
 		void setBlockClicked();
 		void generateBlockClicked();
 		void drawResetClicked();
+		void saveImageClicked();
 
 		std::unique_ptr<blockData> block_data;
 		std::unique_ptr<drawObject> draw_object;
