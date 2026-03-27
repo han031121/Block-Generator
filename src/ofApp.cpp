@@ -58,8 +58,8 @@ void ofApp::guiBlockSetup() {
 	block_settings.add(max_h.set("Max height", 3, 1, 10));
 	block_settings.add(density.set("Density", 20, 0, 100));
 	block_settings.add(allow_duplication.set("Allow duplication", false));
-	block_generation.add(set_block.set("Set block"));
-	block_generation.add(generate_block.set("Generate block"));
+	block_generation.add(set_block.set("Set block (N)"));
+	block_generation.add(generate_block.set("Generate block (G)"));
 
 	gui_block.setup("BLOCK MENU", "block_settings.xml", rect_block_gui.x, rect_block_gui.y);
 	gui_block.setWidthElements(gui_width);
@@ -87,8 +87,8 @@ void ofApp::guiDrawSetup() {
 	draw_settings.add(light_degree);
 	draw_settings.add(thickness.set("Line thickness", 5, 0, 10));
 	draw_settings.add(magnification.set("Magnification", 1, 0.1, 5));
-	draw_functions.add(save_image.set("Save image"));
-	draw_functions.add(reset.set("Reset settings"));
+	draw_functions.add(save_image.set("Save image (S)"));
+	draw_functions.add(reset.set("Reset settings (R)"));
 
 	gui_draw.setup("DRAW MENU", "draw_settings.xml", rect_draw_gui.x, rect_draw_gui.y);
 	gui_draw.setWidthElements(gui_width);
@@ -197,7 +197,15 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	if (key == 'n' || key == 'N') {
+		setBlockClicked();
+	} else if (key == 'g' || key == 'G') {
+		generateBlockClicked();
+	} else if (key == 's' || key == 'S') {
+		saveImageClicked();
+	} else if (key == 'r' || key == 'R') {
+		drawResetClicked();
+	}
 }
 
 //--------------------------------------------------------------
