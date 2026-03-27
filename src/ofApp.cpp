@@ -35,6 +35,7 @@ void ofApp::initializeUiValue() {
 	light_degree_xz.set(25);
 	light_degree_y.set(38);
 	thickness.set(5);
+	magnification.set(1);
 	draw_color.set(ofColor(220, 185, 154));
 }
 
@@ -86,7 +87,7 @@ void ofApp::guiDrawSetup() {
 	draw_settings.add(cam_degree);
 	draw_settings.add(light_degree);
 	draw_settings.add(thickness.set("Line thickness", 5, 0, 10));
-	draw_settings.add(magnification.set("Magnification", 1, 0.1, 5));
+	draw_settings.add(magnification.set("Magnification", 1, 0.2, 5));
 	draw_functions.add(save_image.set("Save image (S)"));
 	draw_functions.add(reset.set("Reset settings (R)"));
 
@@ -103,7 +104,7 @@ void ofApp::drawObjectUpdate() {
 	draw_object->camDegreeUpdate(cam_degree_xz.get(), cam_degree_y.get());
 	draw_object->lightDegreeUpdate(light_degree_xz.get(), light_degree_y.get());
 	draw_object->thicknessUpdate(thickness.get());
-	draw_object->camDistUpdate(magnification.get() * draw_object->getDefaultCamDist());
+	draw_object->camDistUpdate(1 / magnification.get() * draw_object->getDefaultCamDist());
 	draw_object->blockColorUpdate(draw_color.get().r, draw_color.get().g, draw_color.get().b);
 }
 
