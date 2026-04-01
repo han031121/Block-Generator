@@ -94,7 +94,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -192,6 +192,7 @@
     </ClCompile>
     <Link>
       <EntryPointSymbol Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">mainCRTStartup</EntryPointSymbol>
+      <NoEntryPoint Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
     </Link>
     <Link>
       <EntryPointSymbol Condition="'$(Configuration)|$(Platform)'=='Release|x64'">mainCRTStartup</EntryPointSymbol>
