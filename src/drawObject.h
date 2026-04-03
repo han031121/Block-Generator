@@ -56,7 +56,7 @@ public:
 		}
 
 	void render(); //draw and render blocks on fbo
-	void saveImage(std::string filename); //save PNG
+		void saveImage(std::string filename, std::string path = ""); //save PNG
 
 	void getPixels(ofPixels & pixels);
 	void getImage(ofImage & image);

@@ -131,7 +131,7 @@ void drawObject::render() {
 	status.setStatus(statusLevel::Info, "[ drawObject ] Image rendered successfully");
 }
 
-void drawObject::saveImage(std::string filename) {
+void drawObject::saveImage(std::string filename, std::string path) {
 	if (need_to_refresh) {
 		status.setStatus(statusLevel::Error, "[ drawObject ] Need to refresh the image.");
 		return;
@@ -139,6 +139,7 @@ void drawObject::saveImage(std::string filename) {
 	ofPixels pixels;
 	fbo.readToPixels(pixels);
 	ofSaveImage(pixels, filename);
+	std::string name = ofFilePath::join(path, filename);
 
 	status.setStatus(statusLevel::Info, "[ drawObject ] Image " + filename + " saved.");
 };
@@ -175,6 +176,7 @@ std::string drawObject::getIdentify() {
 	   << std::setw(2) << std::setfill('0') << (int)draw_color.g
 	   << std::setw(2) << std::setfill('0') << (int)draw_color.b;
 	s += ss.str();
+	s += "_" + std::to_string((int)cam_dist);
 	return s;
 }
 

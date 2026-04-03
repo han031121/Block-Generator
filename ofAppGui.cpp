@@ -292,9 +292,9 @@ void ofApp::saveImageClicked() {
 	if (!draw_object)
 		return;
 	std::string folder = ofFilePath::getAbsolutePath("saved_images/", false);
+	std::string name = draw_object->getIdentify() + ".jpg";
 	ofDirectory::createDirectory(folder, true, true);
-	std::string name = ofFilePath::join(folder, draw_object->getIdentify() + ".jpg");
-	draw_object->saveImage(name);
+	draw_object->saveImage(name, folder);
 }
 
 //--------------------------------------------------------------
