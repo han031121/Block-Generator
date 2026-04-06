@@ -143,9 +143,11 @@ void ofApp::guiSetScale() {
 
 	ofxGuiSetDefaultHeight(gui_height);
 	font_status.load("Roboto-Regular.ttf", STATUS_FONT_UNIT * gui_scale);
+	font_gui.load("Roboto-Regular.ttf", FONT_UNIT * gui_scale);
 	ofxBaseGui::loadFont("Roboto-Regular.ttf", FONT_UNIT * gui_scale);
-
 	guiRebuild();
+
+	help_height = font_gui.getStringBoundingBox(help_text, 0, 0).getHeight();
 }
 
 //--------------------------------------------------------------
@@ -253,6 +255,11 @@ void ofApp::drawStatus() {
 }
 
 //--------------------------------------------------------------
+void ofApp::drawEtc() {
+	font_gui.drawString(help_text, rect_block_gui.x + margin, rect_block_gui.y + rect_block_gui.height - help_height - margin);
+}
+
+//--------------------------------------------------------------
 void ofApp::maxSizeChanged(int & v) {
 	int max_count = max_r * max_c * max_h;
 	block_count_1.setMax(max_count);
@@ -319,8 +326,6 @@ void ofApp::saveImageClicked() {
 
 //--------------------------------------------------------------
 void ofApp::saveGuiSettings() {
-	//window size
-	//gui scale
 	//block, draw settings?
 	ofJson json;
 

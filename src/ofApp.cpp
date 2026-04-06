@@ -2,24 +2,28 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+	ofSetEscapeQuitsApp(false);
+
 	ofBackground(0);
 
+	//set initial value
 	initializeDrawValue();
 	initializeBlockValue();
 	loadGuiSettings();
 
+	//drawing GUI
 	updateLayout();
 	guiSetListener();
 	guiSetScale();
 
+	//generate objects
 	block_data = std::make_unique<blockData>(block_count_1, block_count_2, max_r, max_c, max_h);
 	block_data->generateBlock();
 	draw_object = std::make_unique<drawObject>(block_data.get(), image_size, image_size);
 
+	//update label gui
 	blockSettingUpdate();
 	blockCurrentInfoUpdate();
-
-	ofSetEscapeQuitsApp(false);
 }
 
 //--------------------------------------------------------------
@@ -38,6 +42,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+	//draw image components
 	ofSetColor(220);
 	ofDrawRectangle(rect_image);
 
@@ -49,6 +54,7 @@ void ofApp::draw() {
 		draw_object->drawFbo(x, y, size, size);
 	}
 
+	//draw gui components
 	if (gui_on) {
 		ofSetColor(50);
 		ofDrawRectangle(rect_block_gui);
@@ -65,30 +71,50 @@ void ofApp::draw() {
 
 		ofSetColor(255);
 		drawStatus();
+		drawEtc();
 	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+	//set block
 	if (key == 'n' || key == 'N') {
 		setBlockClicked();
-	} else if (key == 'g' || key == 'G') {
+	}
+
+	//generate block
+	else if (key == 'g' || key == 'G') {
 		generateBlockClicked();
-	} else if (key == 's' || key == 'S') {
+	}
+
+	//save image
+	else if (key == 's' || key == 'S') {
 		saveImageClicked();
-	} else if (key == 'r' || key == 'R') {
+	}
+
+	//draw reset
+	else if (key == 'r' || key == 'R') {
 		drawResetClicked();
-	} else if (key == '=') {
+	}
+
+	//gui scale up
+	else if (key == '=') {
 		if (gui_scale < 8) {
-			gui_scale++;
+			gui_scale += 0.5;
 			guiSetScale();
 		}
-	} else if (key == '-') {
+	}
+
+	//gui scale down
+	else if (key == '-') {
 		if (gui_scale > 1) {
-			gui_scale--;
+			gui_scale -= 0.5;
 			guiSetScale();
 		}
-	} else if (key == OF_KEY_ESC) {
+	}
+
+	//gui toggle
+	else if (key == OF_KEY_TAB) {
 		gui_on = !gui_on;
 		updateLayout();
 	}
