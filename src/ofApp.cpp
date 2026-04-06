@@ -1,6 +1,28 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
+void ofApp::setup() {
+	ofBackground(0);
+
+	initializeDrawValue();
+	initializeBlockValue();
+	loadGuiSettings();
+
+	updateLayout();
+	guiSetListener();
+	guiSetScale();
+
+	block_data = std::make_unique<blockData>(block_count_1, block_count_2, max_r, max_c, max_h);
+	block_data->generateBlock();
+	draw_object = std::make_unique<drawObject>(block_data.get(), image_size, image_size);
+
+	blockSettingUpdate();
+	blockCurrentInfoUpdate();
+
+	ofSetEscapeQuitsApp(false);
+}
+
+//--------------------------------------------------------------
 void ofApp::update(){
 	if (draw_object) {
 		drawObjectUpdate();
@@ -16,16 +38,6 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	ofSetColor(50);
-	ofDrawRectangle(rect_block_gui);
-	ofDrawRectangle(rect_draw_gui);
-
-	ofNoFill();
-	ofSetLineWidth(3);
-	ofDrawRectangle(rect_status_block);
-	ofDrawRectangle(rect_status_draw);
-	ofFill();
-
 	ofSetColor(220);
 	ofDrawRectangle(rect_image);
 
@@ -37,11 +49,23 @@ void ofApp::draw() {
 		draw_object->drawFbo(x, y, size, size);
 	}
 
-	gui_block.draw();
-	gui_draw.draw();
+	if (gui_on) {
+		ofSetColor(50);
+		ofDrawRectangle(rect_block_gui);
+		ofDrawRectangle(rect_draw_gui);
 
-	ofSetColor(255);
-	drawStatus();
+		ofNoFill();
+		ofSetLineWidth(3);
+		ofDrawRectangle(rect_status_block);
+		ofDrawRectangle(rect_status_draw);
+		ofFill();
+
+		gui_block.draw();
+		gui_draw.draw();
+
+		ofSetColor(255);
+		drawStatus();
+	}
 }
 
 //--------------------------------------------------------------
@@ -64,6 +88,9 @@ void ofApp::keyPressed(int key){
 			gui_scale--;
 			guiSetScale();
 		}
+	} else if (key == OF_KEY_ESC) {
+		gui_on = !gui_on;
+		updateLayout();
 	}
 }
 

@@ -68,6 +68,7 @@ class ofApp : public ofBaseApp{
 		float status_height = 120.0f;
 		int image_size = 1000;
 		int gui_scale = 4;
+		bool gui_on = true;
 
 		ofRectangle rect_draw_gui;
 		ofRectangle rect_block_gui;

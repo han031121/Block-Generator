@@ -1,35 +1,19 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup() {
-	ofBackground(0);
-
-	initializeDrawValue();
-	initializeBlockValue();
-	loadGuiSettings();
-
-	updateLayout();
-	guiSetListener();
-	guiSetScale();
-
-	block_data = std::make_unique<blockData>(block_count_1, block_count_2, max_r, max_c, max_h);
-	block_data->generateBlock();
-	draw_object = std::make_unique<drawObject>(block_data.get(), image_size, image_size);
-
-	blockSettingUpdate();
-	blockCurrentInfoUpdate();
-}
-
-//--------------------------------------------------------------
 void ofApp::updateLayout() {
 	float w = ofGetWidth();
 	float h = ofGetHeight();
 
-	rect_block_gui.set(margin, margin, gui_width, h - 3 * margin - status_height);
-	rect_draw_gui.set(gui_width + 2 * margin, margin, gui_width, h - 3 * margin - status_height);
-	rect_image.set(gui_width * 2 + 3 * margin, margin, w - 2 * gui_width - 4 * margin, h - 2 * margin);
-	rect_status_block.set(rect_block_gui.x, h - margin - status_height, gui_width, status_height);
-	rect_status_draw.set(rect_draw_gui.x, h - margin - status_height, gui_width, status_height);
+	if (gui_on) {
+		rect_block_gui.set(margin, margin, gui_width, h - 3 * margin - status_height);
+		rect_draw_gui.set(gui_width + 2 * margin, margin, gui_width, h - 3 * margin - status_height);
+		rect_image.set(gui_width * 2 + 3 * margin, margin, w - 2 * gui_width - 4 * margin, h - 2 * margin);
+		rect_status_block.set(rect_block_gui.x, h - margin - status_height, gui_width, status_height);
+		rect_status_draw.set(rect_draw_gui.x, h - margin - status_height, gui_width, status_height);
+	} else {
+		rect_image.set(margin, margin, w - 2 * margin, h - 2 * margin);
+	}
 }
 
 //--------------------------------------------------------------
