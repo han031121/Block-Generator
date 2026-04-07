@@ -98,7 +98,7 @@ void ofApp::keyPressed(int key){
 	}
 
 	//gui scale up
-	else if (key == '=') {
+	else if (key == '=' && gui_on) {
 		if (gui_scale < 8) {
 			gui_scale += 0.5;
 			guiSetScale();
@@ -106,7 +106,7 @@ void ofApp::keyPressed(int key){
 	}
 
 	//gui scale down
-	else if (key == '-') {
+	else if (key == '-' && gui_on) {
 		if (gui_scale > 1) {
 			gui_scale -= 0.5;
 			guiSetScale();
