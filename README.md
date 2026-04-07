@@ -1,4 +1,4 @@
-# BlockGeneratorApplication
+# Block Generator
 
 ## 개요
 
@@ -13,7 +13,7 @@
 
 ## 설치
 
-### [1.0.1 Release](https://github.com/han031121/BlockGeneratorApplication/releases/tag/v1.0.1)
+### [1.0.2 Release](https://github.com/han031121/BlockGeneratorApplication/releases/tag/1.0.2)
 
 위 링크에서 **block_generator.zip**을 다운로드 및 압축 해제 후, **blockGeneratorApplication.exe**을 실행해 주세요.
 
@@ -117,7 +117,7 @@
 
 ### 기타
 
-- 설정 파일(json)은 `data` 폴더에 저장됩니다.
+- 설정 파일(json, xml)은 `data` 폴더에 저장됩니다.
 - `data` 폴더의 폰트 파일이 없으면 실행되지 않습니다.
 - 이미지는 `saved_images` 폴더에 저장됩니다.
 
@@ -136,7 +136,7 @@
 3. 일정 횟수 이상 생성을 시도했다면 더 이상 블록을 생성할 수 없는 것으로 판단하고, 블록 생성이 중단됩니다.
 
 ### 가려진 블록 생성 방지
-생성 위치 후보를 설정하는 과정에서, 현재 위치가 생성 가능한 위치인지 판별하는 과정을 거칩니다. 이때, 현재 위치에 블록이 생성되면, 인접한 블록 중 완전히 가려지는 블록이 있는지 판별합니다.
+생성 위치 후보를 설정하는 과정에서, 현재 위치가 생성 가능한 위치인지 판별하는 과정을 거칩니다. 현재 생성하고자 하는 위치에 블록이 생성될 경우, 인접한 위치 중에서 블록들에 의해 완전히 가려져 높이를 알 수 없는 위치가 존재한다면 생성할 수 없는 위치로 간주합니다.
 
 인접한 블록에 대해서만 판별하기 때문에, 블록 군집의 규모가 커질수록 정확도가 떨어집니다.
 
