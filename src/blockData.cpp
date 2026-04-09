@@ -6,9 +6,11 @@ std::mt19937 mt(rd());
 
 void blockData::generateBlock() {
 	int count = 0;
+	int fail_count = std::min(MAX_FAIL_COUNT, (int)(3000 * std::pow(30.0 / (max_r * max_c * max_h), 1.6266)));
+	std::cout << fail_count << "\n";
 
 	if (!allow_duplicate) {
-		while (count++ <= std::max(FAIL_COUNT, (int)created_list.size())) {
+		while (count++ <= std::max(fail_count, (int)created_list.size())) {
 			init();
 			makeBlock();
 
@@ -25,7 +27,7 @@ void blockData::generateBlock() {
 		makeBlock();
 	}
 
-	if (count > FAIL_COUNT) {
+	if (count > fail_count) {
 		init();
 		is_generated = false;
 		status.setStatus(statusLevel::Error, "[ blockData ] No more unique block configurations can be generated. Please generate new block data object.");

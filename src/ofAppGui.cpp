@@ -300,6 +300,8 @@ void ofApp::setBlockClicked() {
 
 //--------------------------------------------------------------
 void ofApp::generateBlockClicked() {
+	//block_data->status.setStatus(statusLevel::Info, "[ blockData ] Generating block.");
+
 	if (!block_data)
 		return;
 	if (draw_object)
