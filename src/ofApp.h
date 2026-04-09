@@ -72,7 +72,7 @@ class ofApp : public ofBaseApp{
 		float gui_height = 40.0f;
 		float margin = 10.0f;
 		float status_height = 120.0f;
-		int image_size = 1000;
+		int image_size = 2000;
 		float gui_scale = 4;
 		bool gui_on = true;
 

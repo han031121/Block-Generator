@@ -49,7 +49,7 @@ void ofApp::initializeDrawValue() {
 	light_degree_y.set("Vertical", 38, -89.99, 89.99);
 
 	draw_color.set("Draw color", ofColor(220, 185, 154));
-	thickness.set("Line thickness", 5, 0, 10);
+	thickness.set("Line thickness", 5, 0, 15);
 	magnification.set("Magnification", 1, 0.2, 5);
 	fix_light.set("Fix light degree", false);
 
