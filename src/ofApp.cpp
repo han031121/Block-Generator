@@ -171,7 +171,16 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::mouseScrolled(int x, int y, float scroll_x, float scroll_y) {
+	if (checkMouseOnImage()) {
+		float coeff = 0.1f;
 
+		magnification += scroll_y * coeff;
+
+		if (magnification > 5)
+			magnification = 5;
+		if (magnification < 0.2)
+			magnification = 0.2;
+	}
 }
 
 //--------------------------------------------------------------
